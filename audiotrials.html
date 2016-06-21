@@ -2,7 +2,7 @@
 <html lang=en>
     <head>
         <meta charset="UTF-8">
-        <title>This is my page!</title>
+        <title>Audio Tests</title>
 
         <!-- CSS Goes Here -->
         <!-- Latest compiled and minified CSS -->
@@ -12,25 +12,16 @@
 
         <!-- <link rel="stylesheet" href="style.css"> -->
         <script src="https://code.createjs.com/soundjs-0.6.2.min.js"></script></head>
-        <script>
 
-        function loadSound(){
-          createjs.Sound.registerSounds([{src:"watering-plants.wav", id:"water"}, {src:"dizzy-spells.mp3", id:"soundID"},{src:"hhavok-main.mp3", id:"song2"}, {src:"jingle-win.wav", id:"jingle"}]);
-        }
-
-        function playSound(){
-          createjs.Sound.play("water");
-          createjs.Sound.play("jingle");
-        }
-        </script>
-    </head>
-
+        <!-- Tests for all the sound functions below!  -->
     <body onload="loadSound();">
-      <button onclick="playSound();" class="playsound">Play</button>
-      <audio id="firstSong" controls>
-        <source src="dizzy-spells.mp3" type="audio/mpeg">
-
-      </audio>
+      <button onclick='stopAllSound();'>Stop Sounds</button>
+      <button onclick='playSong("song1");'>Play 1st Song</button>
+      <button onclick='playSong("song2");' class="playsound">Play Another Song</button>
+      <button onclick='playSound("water");' class="playsound">Play water sound</button>
+      <button onclick='playSound("jingle");' class="playsound">Play jingle sound</button>
+      <button onclick='playSound("rake");' class="playsound">Play rake sound</button>
+      <button onclick='playSound("click");' class="playsound">Play button click sound</button>
 
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
@@ -38,11 +29,20 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
     </body>
 <script>
-  var audio = document.getElementById("firstSong");
-  audio.play();
-  audio.addEventListener("ended", function(){
-    audio.src = "hhavok-main.mp3";
-    audio.play();
-  })
+function loadSound(){
+  createjs.Sound.registerSounds([{src:"watering-plants.wav", id:"water"}, {src:"dizzy-spells.mp3", id:"song1"}, {src:"hhavok-main.mp3", id:"song2"}, {src:"jingle-win.wav", id:"jingle"}, {src:"raking.wav", id:"rake"}, {src:"button-click.wav", id:"click"}]);
+};
+function playSong(songName){
+  createjs.Sound.stop();
+    var isPlaying = createjs.Sound.play(songName, {loop: -1});
+    // Commented out below is the function to set the volume for each song.
+    // isPlaying.volume = isPlaying.volume * 1.0;
+  };
+function playSound(soundEffect){
+      createjs.Sound.play(soundEffect);
+    };
+function stopAllSound(){
+  createjs.Sound.stop();
+};
 </script>
 </html>
