@@ -17,12 +17,13 @@
     <body onload="loadSound();">
       <button onclick='stopAllSound();'>Stop Sounds</button>
       <button onclick='playSong("song1");'>Play 1st Song</button>
-      <button onclick='playSong("song2");' class="playsound">Play Another Song</button>
-      <button onclick='playSound("water");' class="playsound">Play water sound</button>
-      <button onclick='playSound("jingle");' class="playsound">Play jingle sound</button>
-      <button onclick='playSound("rake");' class="playsound">Play rake sound</button>
-      <button onclick='playSound("click");' class="playsound">Play button click sound</button>
-      <button onclick='playTransition("jingle", "rake");' class="playsound">Play transition</button>
+      <button onclick='playSong("song2");'>Play Another Song</button>
+      <button onclick='playSound("water");'>Play water sound</button>
+      <button onclick='playSound("jingle");'>Play jingle sound</button>
+      <button onclick='playSound("rake");'>Play rake sound</button>
+      <button onclick='playSound("click");'>Play button click sound</button>
+      <button onclick='playTransition("jingle", "rake");'>Play transition</button>
+      <button onclick='muteSound();'>Mute Sound</button>
 
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
@@ -33,9 +34,10 @@
 function loadSound(){
   createjs.Sound.registerSounds([{src:"watering-plants.wav", id:"water"}, {src:"dizzy-spells.mp3", id:"song1"}, {src:"hhavok-main.mp3", id:"song2"}, {src:"jingle-win.wav", id:"jingle"}, {src:"raking.wav", id:"rake"}, {src:"button-click.wav", id:"click"}]);
 };
+var isPlaying
 function playSong(songName){
   createjs.Sound.stop();
-    var isPlaying = createjs.Sound.play(songName, {loop: -1});
+    isPlaying = createjs.Sound.play(songName, {loop: -1});
     // Commented out below is the function to set the volume for each song.
     // isPlaying.volume = isPlaying.volume * 1.0;
   };
@@ -50,6 +52,9 @@ function playTransition(soundEffect, songName){
   createjs.Sound.stop();
   var transition = createjs.Sound.play(soundEffect);
   transition.on("complete", playSound(songName))
+}
+function muteSound(){
+  isPlaying.muted = !isPlaying.muted;
 }
 </script>
 </html>
